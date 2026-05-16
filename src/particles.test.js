@@ -1,8 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { particleCount, maxRadiusPx, createParticles } from './particles.js';
 import {
-  BASE_PARTICLE_COUNT, MAX_R_CAP, MAX_R_SHORT_FRACTION,
-  MIN_PARTICLE_SIZE, S_MIN, S_MAX,
+  BASE_PARTICLE_COUNT,
+  MAX_R_CAP,
+  MAX_R_SHORT_FRACTION,
+  MIN_PARTICLE_SIZE,
+  S_MIN,
+  S_MAX,
 } from './config.js';
 
 describe('particleCount', () => {

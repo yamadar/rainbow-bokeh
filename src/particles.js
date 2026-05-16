@@ -23,14 +23,20 @@ export function createParticles({ W, H, DPR, scale, shortSide }) {
     const u = Math.random();
     const size = particleSize(u, maxRpx) * DPR;
     return {
-      x: rand(0, W), y: rand(0, H), r: size,
-      vx: rand(-0.2, 0.2) * DPR, vy: rand(-0.18, 0.18) * DPR,
-      ix: 0, iy: 0,            // 一時的な力(衝撃)
-      boost: 0,                // 明度ブースト(減衰)
+      x: rand(0, W),
+      y: rand(0, H),
+      r: size,
+      vx: rand(-0.2, 0.2) * DPR,
+      vy: rand(-0.18, 0.18) * DPR,
+      ix: 0,
+      iy: 0, // 一時的な力(衝撃)
+      boost: 0, // 明度ブースト(減衰)
       phase: rand(0, TAU),
       pulseSpeed: rand(0.004, 0.022),
       pulseDepth: rand(0.25, 0.55),
-      lightness: rand(70, 82),
+      lightness: rand(70, 82), // 明度ランプ OFF 時のフォールバック
+      hueSeed: rand(-1, 1), // 案1: 色相オフセットの個体係数 [-1,1)
+      sizeU: u, // 案2: サイズ乱数 (明度ランプの入力)
     };
   });
 }
