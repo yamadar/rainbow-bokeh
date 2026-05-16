@@ -1,50 +1,149 @@
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-  html,body{
-    width:100%;height:100%;overflow:hidden;background:#05000d;
-    touch-action:none;overscroll-behavior:none;
-    user-select:none;-webkit-user-select:none;
-    -webkit-tap-highlight-color:transparent;
-  }
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #05000d;
+  touch-action: none;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  /* 虹色グラデーション - 高彩度・高コントラスト */
-  .bg{
-    position:fixed;inset:0;
-    background:
-      radial-gradient(ellipse at 20% 28%, #ffa500 0%, transparent 52%),
-      radial-gradient(ellipse at 80% 20%, #00d9c0 0%, transparent 48%),
-      radial-gradient(ellipse at 85% 80%, #1840e8 0%, transparent 52%),
-      radial-gradient(ellipse at 25% 85%, #050010 0%, transparent 58%),
-      linear-gradient(135deg,#ff5e00 0%,#ff0a73 28%,#8800d4 55%,#1a3fd6 80%,#00b8e0 100%);
-    background-size:200% 200%, 220% 220%, 240% 240%, 200% 200%, 300% 300%;
-    animation: drift 32s ease-in-out infinite, hueCycle 45s linear infinite;
-    filter: saturate(1.55) contrast(1.2);
+/* 虹色グラデーション - 高彩度・高コントラスト */
+.bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 28%, #ffa500 0%, transparent 52%),
+    radial-gradient(ellipse at 80% 20%, #00d9c0 0%, transparent 48%),
+    radial-gradient(ellipse at 85% 80%, #1840e8 0%, transparent 52%),
+    radial-gradient(ellipse at 25% 85%, #050010 0%, transparent 58%),
+    linear-gradient(135deg, #ff5e00 0%, #ff0a73 28%, #8800d4 55%, #1a3fd6 80%, #00b8e0 100%);
+  background-size:
+    200% 200%,
+    220% 220%,
+    240% 240%,
+    200% 200%,
+    300% 300%;
+  animation:
+    drift 32s ease-in-out infinite,
+    hueCycle 45s linear infinite;
+  filter: saturate(1.55) contrast(1.2);
+}
+@keyframes drift {
+  0% {
+    background-position:
+      0% 50%,
+      100% 0%,
+      0% 100%,
+      100% 50%,
+      0% 50%;
   }
-  @keyframes drift{
-    0%   {background-position:0% 50%, 100% 0%, 0% 100%, 100% 50%, 0% 50%}
-    50%  {background-position:100% 50%, 0% 100%, 100% 0%, 0% 50%, 100% 50%}
-    100% {background-position:0% 50%, 100% 0%, 0% 100%, 100% 50%, 0% 50%}
+  50% {
+    background-position:
+      100% 50%,
+      0% 100%,
+      100% 0%,
+      0% 50%,
+      100% 50%;
   }
-  @keyframes hueCycle{
-    0%  {filter:saturate(1.55) contrast(1.2) hue-rotate(0deg)}
-    100%{filter:saturate(1.55) contrast(1.2) hue-rotate(360deg)}
+  100% {
+    background-position:
+      0% 50%,
+      100% 0%,
+      0% 100%,
+      100% 50%,
+      0% 50%;
   }
+}
+@keyframes hueCycle {
+  0% {
+    filter: saturate(1.55) contrast(1.2) hue-rotate(0deg);
+  }
+  100% {
+    filter: saturate(1.55) contrast(1.2) hue-rotate(360deg);
+  }
+}
 
-  canvas{
-    position:fixed;inset:0;
-    mix-blend-mode:plus-lighter;
-    pointer-events:none;
-  }
+canvas {
+  position: fixed;
+  inset: 0;
+  mix-blend-mode: plus-lighter;
+  pointer-events: none;
+}
 
-  .hint{
-    position:fixed;
-    bottom:7vh;left:50%;transform:translateX(-50%);
-    color:rgba(255,250,235,0.55);
-    font:300 12px/1 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;
-    letter-spacing:0.25em;
-    pointer-events:none;
-    z-index:10;
-    white-space:nowrap;
-    mix-blend-mode:plus-lighter;
-    animation: hintFade 2s ease-out 7s forwards;
+/* 配色トグルパネル (docs/COLOR.md の適用案を切替) */
+.panel {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  padding: 0 10px;
+  z-index: 20;
+}
+.panel button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(255, 250, 235, 0.25);
+  background: rgba(10, 4, 20, 0.35);
+  color: rgba(255, 250, 235, 0.5);
+  font:
+    300 11px/1 system-ui,
+    -apple-system,
+    'Hiragino Sans',
+    'Noto Sans JP',
+    sans-serif;
+  letter-spacing: 0.06em;
+  padding: 7px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    color 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+}
+.panel button.on {
+  color: #05000d;
+  background: rgba(255, 238, 210, 0.92);
+  border-color: rgba(255, 238, 210, 0.92);
+}
+
+.hint {
+  position: fixed;
+  bottom: 7vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 250, 235, 0.55);
+  font:
+    300 12px/1 system-ui,
+    -apple-system,
+    'Hiragino Sans',
+    'Noto Sans JP',
+    sans-serif;
+  letter-spacing: 0.25em;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  mix-blend-mode: plus-lighter;
+  animation: hintFade 2s ease-out 7s forwards;
+}
+@keyframes hintFade {
+  to {
+    opacity: 0;
   }
-  @keyframes hintFade{ to { opacity:0 } }
+}

@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { clamp, rand, computeScale, particleSize } from './helpers.js';
-import {
-  SCALE_REF, S_MIN, S_MAX, MIN_PARTICLE_SIZE, SIZE_DIST_EXPONENT,
-} from './config.js';
+import { SCALE_REF, S_MIN, S_MAX, MIN_PARTICLE_SIZE, SIZE_DIST_EXPONENT } from './config.js';
 
 describe('clamp', () => {
   it('returns value unchanged when inside range', () => {
@@ -33,7 +31,8 @@ describe('rand', () => {
     }
   });
   it('covers most of the range across many samples', () => {
-    let min = Infinity, max = -Infinity;
+    let min = Infinity,
+      max = -Infinity;
     for (let i = 0; i < 5000; i++) {
       const v = rand(0, 100);
       if (v < min) min = v;

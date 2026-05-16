@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  createPointer, pointerDown, pointerMove, pointerUp, updatePointer,
-} from './pointer.js';
+import { createPointer, pointerDown, pointerMove, pointerUp, updatePointer } from './pointer.js';
 import { STATE, HOLD_TIME, TAP_MAX_TIME } from './config.js';
 
 describe('createPointer', () => {
@@ -79,7 +77,10 @@ describe('pointerUp', () => {
 describe('updatePointer', () => {
   it('computes per-frame velocity from last position', () => {
     const p = createPointer(800, 600);
-    p.x = 410; p.y = 290; p.lastX = 400; p.lastY = 300;
+    p.x = 410;
+    p.y = 290;
+    p.lastX = 400;
+    p.lastY = 300;
     updatePointer(p, 0);
     expect(p.vx).toBe(10);
     expect(p.vy).toBe(-10);

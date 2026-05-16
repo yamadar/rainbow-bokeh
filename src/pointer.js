@@ -7,11 +7,16 @@ import { STATE, HOLD_TIME, TAP_MAX_TIME } from './config.js';
 // 初期ポインタ状態を生成
 export function createPointer(W, H) {
   return {
-    x: W * 0.5, y: H * 0.5,
-    lastX: W * 0.5, lastY: H * 0.5,
-    vx: 0, vy: 0,
+    x: W * 0.5,
+    y: H * 0.5,
+    lastX: W * 0.5,
+    lastY: H * 0.5,
+    vx: 0,
+    vy: 0,
     state: STATE.IDLE,
-    downAt: 0, downX: 0, downY: 0,
+    downAt: 0,
+    downX: 0,
+    downY: 0,
     moved: false,
     holdIntensity: 0,
     hovering: false,
@@ -34,7 +39,8 @@ export function pointerMove(pointer, x, y, isMouse, moveThreshold) {
   pointer.y = y;
   if (isMouse) pointer.hovering = true;
   if (pointer.state !== STATE.IDLE && !pointer.moved) {
-    const dx = pointer.x - pointer.downX, dy = pointer.y - pointer.downY;
+    const dx = pointer.x - pointer.downX,
+      dy = pointer.y - pointer.downY;
     if (dx * dx + dy * dy > moveThreshold * moveThreshold) {
       pointer.moved = true;
       pointer.state = STATE.DRAG;

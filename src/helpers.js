@@ -1,10 +1,7 @@
 // ===== 純粋ヘルパー =====
 // DOM/canvas/window に一切触れない純粋関数のみ。ユニットテスト対象。
 
-import {
-  SCALE_REF, S_MIN, S_MAX,
-  MIN_PARTICLE_SIZE, SIZE_DIST_EXPONENT,
-} from './config.js';
+import { SCALE_REF, S_MIN, S_MAX, MIN_PARTICLE_SIZE, SIZE_DIST_EXPONENT } from './config.js';
 
 // 値を [lo, hi] にクランプ
 export const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));

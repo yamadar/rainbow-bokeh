@@ -9,7 +9,8 @@ import { STATE } from './config.js';
 export function spawnRipple(ripples, x, y, env, opts = {}) {
   const { W, H, S, DPR } = env;
   ripples.push({
-    x, y,
+    x,
+    y,
     radius: opts.startRadius || 0,
     maxRadius: opts.maxRadius || Math.min(W, H) * 0.55,
     speed: (opts.speed || 4 * S) * DPR,
@@ -25,7 +26,8 @@ export function applyAttraction(particles, pointer, env) {
   const reach2 = reach * reach;
   const intensity = pointer.holdIntensity;
   for (const p of particles) {
-    const dx = pointer.x - p.x, dy = pointer.y - p.y;
+    const dx = pointer.x - p.x,
+      dy = pointer.y - p.y;
     const d2 = dx * dx + dy * dy;
     if (d2 < reach2 && d2 > 1) {
       const d = Math.sqrt(d2);
@@ -46,7 +48,8 @@ export function applyFlick(particles, pointer, env) {
   const reach = 220 * S * DPR;
   const reach2 = reach * reach;
   for (const p of particles) {
-    const dx = p.x - pointer.x, dy = p.y - pointer.y;
+    const dx = p.x - pointer.x,
+      dy = p.y - pointer.y;
     const d2 = dx * dx + dy * dy;
     if (d2 < reach2) {
       const t = 1 - Math.sqrt(d2) / reach;
@@ -70,7 +73,8 @@ export function updateRipples(ripples, particles, env) {
     }
     const thickness = 70 * S * DPR;
     for (const p of particles) {
-      const dx = p.x - r.x, dy = p.y - r.y;
+      const dx = p.x - r.x,
+        dy = p.y - r.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
       const frontDist = Math.abs(dist - r.radius);
       if (frontDist < thickness) {

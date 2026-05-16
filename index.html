@@ -1,15 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rainbow Bokeh</title>
-</head>
-<body>
-<div class="bg"></div>
-<canvas id="c"></canvas>
-<div class="hint">タップ ・ 長押し ・ スワイプ</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rainbow Bokeh</title>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <canvas id="c"></canvas>
+    <div class="panel" id="panel">
+      <button type="button" data-flag="hueSpread">色相幅</button>
+      <button type="button" data-flag="lightnessRamp">明度ランプ</button>
+      <button type="button" data-flag="oklch">OKLCH</button>
+      <button type="button" data-flag="bgHarmony">背景調和</button>
+      <button type="button" data-flag="hueDrift">色相回転</button>
+    </div>
+    <div class="hint">タップ ・ 長押し ・ スワイプ</div>
 
-  <script type="module" src="/src/main.js"></script>
-</body>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
